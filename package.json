@@ -9,14 +9,17 @@
     "db:migrate": "yarn typeorm:cli migration:run ",
     "migration:revert": "yarn typeorm:cli migration:revert",
     "migration:create": "yarn typeorm:cli migration:create",
-    "db:sync": "yarn typeorm:cli schema:sync && yarn db:migrate",
+    "db:sync": "yarn typeorm:cli schema:sync",
     "db:drop": "yarn typeorm:cli schema:drop",
     "start": "yarn db:migrate && ts-node src/index.ts",
     "dev:server": "NODE_ENV=development  ts-node-dev -r tsconfig-paths/register --transpile-only --ignore-watch node_modules src/index.ts"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "pg": "^8.6.0",
+    "reflect-metadata": "^0.1.13",
     "tsconfig-paths": "^3.9.0",
     "typeorm": "^0.2.32"
   },
