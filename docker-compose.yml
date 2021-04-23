@@ -18,7 +18,9 @@ services:
       - POSTGRES_HOST=database
       - POSTGRES_PORT=5432
       - WAIT_HOSTS=database:5432
-    depends_on:
+    links:
+      - database
+    depends_on: 
       - database
 
   database:
