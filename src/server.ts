@@ -1,9 +1,10 @@
 import express from "express";
 import connectDb from "./database/connection";
 
+import router from './routes/index.routes';
 const server = express();
 
-const instance = {
+const app = {
   database: async () => {
     try {
       console.log('============= starting database =============')
@@ -13,6 +14,8 @@ const instance = {
     }
   },
   plugins: async () => {
+    server.use(express.json())
+    server.use(router);
     console.log('============= starting plugins =============')
   },
   start: async () => {
@@ -28,4 +31,4 @@ const instance = {
   },
 };
 
-export default instance;
+export default app;
