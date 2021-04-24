@@ -4,7 +4,7 @@
   "port": 5432,
   "username": "root",
   "password": "root",
-  "database": "creative-cloud-db",
+  "database": "creative-code-db",
   "logging": true,
   "synchronize": true,
   "entities": ["./src/models/*.ts"],
