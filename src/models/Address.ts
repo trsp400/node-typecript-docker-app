@@ -6,7 +6,7 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 
-@Entity("Addresses")
+@Entity("addresses")
 class Address {
   @PrimaryGeneratedColumn("uuid")
   id: string;
@@ -18,7 +18,7 @@ class Address {
   number: number;
 
   @Column()
-  complement?: string;
+  complement: string;
 
   @Column()
   cep: number;
