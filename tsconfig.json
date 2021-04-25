@@ -16,7 +16,13 @@
     "rootDir": "./src",
     "strict": false,
     "strictPropertyInitialization": false,
-    "baseUrl": "./src",
+    "baseUrl": "./src",                       /* Base directory to resolve non-absolute module names. */
+    "paths": {
+      "@modules/*": ["modules/*"],
+      "@configs/*": ["configs/*"],
+      "@shared/*": ["shared/*"],
+      "@models/*": ["models/*"]
+    },   
     
     "esModuleInterop": true /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */,
 
