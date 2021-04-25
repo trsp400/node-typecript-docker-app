@@ -28,7 +28,7 @@ class CreateUserService {
 
     const emailValidator = new ValidateUserEmailService();
 
-    const {valid: isEmailValid, reason} = await emailValidator.execute(email);
+    const {valid: isEmailValid} = await emailValidator.execute(email);
 
     if (!isEmailValid) throw new Error("Invalid e-mail");
 
