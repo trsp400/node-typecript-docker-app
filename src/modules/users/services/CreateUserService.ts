@@ -30,7 +30,7 @@ class CreateUserService {
 
     const {valid: isEmailValid, reason} = await emailValidator.execute(email);
 
-    if (!isEmailValid) throw new Error(reason);
+    if (!isEmailValid) throw new Error("Invalid e-mail");
 
     const userExists = await usersRepository.findOne({
       where: {
