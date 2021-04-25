@@ -4,7 +4,7 @@ import { getRepository } from "typeorm";
 
 import verifyAuthentication from "../middlewares/verifyAuthentication";
 import Address from "../models/Address";
-import CreateAddressService from "../services/CreateAddressService";
+import CreateAddressService from "@modules/addresses/services/CreateAddressService";
 
 const addressesRoutes = Router();
 
@@ -92,14 +92,12 @@ addressesRoutes.delete(
 
       const addressExists = await addressesRepository.findOne(id);
 
-      console.log(addressExists);
-
       if (!addressExists)
         return response.status(404).send({
           error: "Address not found",
         });
 
-      await addressesRepository.delete(addressExists);
+      await addressesRepository.delete(addressExists?.id);
 
       return response.status(200).send();
     } catch (error) {

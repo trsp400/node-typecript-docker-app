@@ -4,7 +4,7 @@ import { getRepository } from "typeorm";
 
 import verifyAuthentication from "../middlewares/verifyAuthentication";
 import User from "../models/User";
-import CreateUserService from "../services/CreateUserService";
+import CreateUserService from "@modules/users/services/CreateUserService";
 
 const usersRoutes = Router();
 
@@ -20,7 +20,7 @@ usersRoutes.get(
 
 usersRoutes.get(
   "/",
-  // verifyAuthentication,
+  verifyAuthentication,
   async (request: Request, response: Response) => {
     const usersRepository = getRepository(User);
     return response.send(await usersRepository.find());
@@ -55,7 +55,7 @@ usersRoutes.post("/", async (request: Request, response: Response) => {
 
     return response.status(201).send(user);
   } catch (error) {
-    return response.status(500).json(error.message);
+    return response.status(401).json({message: error.message});
   }
 });
 
@@ -105,7 +105,7 @@ usersRoutes.delete(
           error: "User not found",
         });
 
-      await usersRepository.delete(userExists);
+      await usersRepository.delete(userExists?.id);
 
       return response.status(200).send();
     } catch (error) {
