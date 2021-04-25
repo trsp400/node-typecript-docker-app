@@ -1,4 +1,4 @@
-import { HookHandlerDoneFunction, FastifyReply, FastifyRequest } from "fastify";
+import { Request, Response, NextFunction, response } from "express";
 import { verify } from "jsonwebtoken";
 
 interface TokenPayload {
@@ -7,7 +7,7 @@ interface TokenPayload {
   iat: number;
 }
 
-interface ICustomRequest extends FastifyRequest {
+interface ICustomRequest extends Request {
   user?: {
     id: string;
   };
@@ -15,12 +15,12 @@ interface ICustomRequest extends FastifyRequest {
 
 export default function verifyAuthentication(
   request: ICustomRequest,
-  reply: FastifyReply,
-  next: HookHandlerDoneFunction
+  response: Response,
+  next: NextFunction
 ) {
   const authHeader = request.headers.authorization;
 
-  if (!authHeader) throw new Error("JWT missing");
+  if (!authHeader) response.status(401).json({message: 'JWT missing'});
 
   const [, token] = authHeader.split(" ");
 
