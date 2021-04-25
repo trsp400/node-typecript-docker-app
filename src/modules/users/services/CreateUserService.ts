@@ -1,4 +1,5 @@
-import User from "../models/User";
+import User from "@models/User";
+import ValidateUserEmailService from './ValidateUserEmailService';
 
 import { getRepository } from "typeorm";
 import { hash } from "bcryptjs";
@@ -25,6 +26,12 @@ class CreateUserService {
   }: Request): Promise<User> {
     const usersRepository = getRepository(User);
 
+    const emailValidator = new ValidateUserEmailService();
+
+    const {valid: isEmailValid, reason} = await emailValidator.execute(email);
+
+    if (!isEmailValid) throw new Error(reason);
+
     const userExists = await usersRepository.findOne({
       where: {
         email,
@@ -40,9 +47,9 @@ class CreateUserService {
       email,
       password: hashedPassword,
       phone,
-      age: 12,
-      weigth: 70,
-      ethnicity: "indigena",
+      age,
+      weigth,
+      ethnicity,
     });
 
     await usersRepository.save(newUser);
